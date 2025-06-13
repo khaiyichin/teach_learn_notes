@@ -1,33 +1,40 @@
 name: "Auto-generate file tree in README"
 
 on:
+    # Triggers the workflow on push events on the "main" branch
     push:
         branches:
             - main
-        workflow_dispatch:
+
+    # Allow manual execution from GitHub
+    workflow_dispatch:
 
 jobs:
     update-readme:
         runs-on: ubuntu-latest
 
-    steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
+        steps:
 
-        - name: Generate README tree
-          uses: RavelloH/readme-tree@v1.1.0
-          with:
-            showall: yes
-            showdirectoryname: no
-            showchangetime: no
-            showsize: no
-            showallname: no
-            ignoregit: yes
+            # Check out the repository to the container
+            - name: Check out repository
+              uses: actions/checkout@v4
 
-        - name: Commit changes
-          run: |
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add README.md
-            git commit -m "chore: Auto-update file tree in README.md" || echo "No changes"
-            git push
+            # Modify the README file using the readme-tree action
+            - name: Generate README tree
+              uses: RavelloH/readme-tree@v1.1.0
+              with:
+                showall: yes
+                showdirectoryname: no
+                showchangetime: no
+                showsize: no
+                showallname: no
+                ignoregit: yes
+
+            # Commit changes made to the README file
+            - name: Commit changes
+              run: |
+                git config user.name "github-actions[bot]"
+                git config user.email "github-actions[bot]@users.noreply.github.com"
+                git add README.md
+                git commit -m "chore: Auto-update file tree in README.md" || echo "No changes"
+                git push
