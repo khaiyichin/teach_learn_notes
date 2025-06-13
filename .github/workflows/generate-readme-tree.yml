@@ -1,0 +1,33 @@
+name: "Auto-generate file tree in README"
+
+on:
+    push:
+        branches:
+            - main
+        workflow_dispatch:
+
+jobs:
+    update-readme:
+        runs-on: ubuntu-latest
+
+    steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+
+        - name: Generate README tree
+          uses: RavelloH/readme-tree@v1.1.0
+          with:
+            showall: yes
+            showdirectoryname: no
+            showchangetime: no
+            showsize: no
+            showallname: no
+            ignoregit: yes
+
+        - name: Commit changes
+          run: |
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add README.md
+            git commit -m "chore: Auto-update file tree in README.md" || echo "No changes"
+            git push
