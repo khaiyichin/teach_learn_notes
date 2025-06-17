@@ -12,6 +12,8 @@ This is a collection of notes I made over the years to document interesting topi
 ├── math
 │   ├── cov_matrix_derivative.ipynb
 │   └── infimum_supremum.ipynb
+├── misc
+│   └── solving_sudoku_backtracking.ipynb
 ├── ml_dl
 │   ├── pca.ipynb
 │   └── pytorch_nn_tutorial.ipynb
@@ -29,6 +31,6 @@ This is a collection of notes I made over the years to document interesting topi
 │   └── variational_inference.ipynb
 └── tree.bak
 
-8 directories, 16 files
+9 directories, 17 files
 ```
 <!-- readme-tree end -->
